@@ -23,4 +23,11 @@ module.exports = (app, allModels) => {
 
   app.get('/kaching/home/expenses',kachingControllerCallbacks.expenses);
 
+  app.get('/kaching/home/report',kachingControllerCallbacks.report);
+
+  app.get('/kaching/home/expenses/add',kachingControllerCallbacks.add);
+  app.post('/kaching/home/expenses/add',kachingControllerCallbacks.add);
+
+  app.get('/kaching/login',kachingControllerCallbacks.logout);
+
 };

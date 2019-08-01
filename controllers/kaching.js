@@ -22,6 +22,7 @@ var d = new Date();
          let hashedPassword = sha256( request.body.password + SALT );
 
          request.body.password = hashedPassword;
+         console.log("jhagsjd")
 
          db.users.registerUser(request.body, (err, result) => {
             if (err) {
@@ -34,12 +35,28 @@ var d = new Date();
                     var userId = request.cookies.user_id;
 
                     let loggedInCookie = sha256( user_id + 'logged_id' + SALT );
-                response.cookie('user_name', result.rows[0].name);
-                response.cookie('loggedIn', loggedInCookie);
-                response.cookie('user_id', user_id);
+                    response.cookie('user_name', result.rows[0].name);
+                    console.log(result.rows[0].name)
+                    response.cookie('loggedIn', loggedInCookie);
+                    response.cookie('user_id', user_id);
 
 
-                    db.expenses.registerNewUser(user_id,(err,result)=>{
+                    var now = new Date();
+                    var m = now.getMonth();
+                    m = m + 1;
+                    var d = now.getDate();
+                    var y = now.getFullYear();
+                    var loggedDate = m + "/" + d + "/" + y;
+
+                    const data = {
+                        userId: user_id,
+                        types: 5,
+                        description: '-',
+                        amount: '$0'
+                    }
+
+
+                    db.expenses.registerNewUser(data, (err,result)=>{
                         if (err) {
                             response.send(err)
 
@@ -53,7 +70,7 @@ var d = new Date();
                         }
                     })
 
-                 } else {
+                } else {
                     response.render('components/usernameTaken');
                 }
             }
@@ -113,7 +130,6 @@ var d = new Date();
                  else {
                     console.log("test")
                     let data = {
-
                         userdata : result
                     };
                     console.log(result);
@@ -124,43 +140,63 @@ var d = new Date();
     };
 
     let expensesController = (request,response)=>{
-        response.render('showExpenses');
+        var username = request.cookies.user_name;
+        var userId = request.cookies.user_id;
+
+        db.expenses.getNameAndAmount(username, (err, nameAmountRes) => {
+            if (err) {
+                response.send(err)
+            }
+
+            else {
+                //console.log("test")
+                // let data = {
+                //     userdata : nameAmountRes
+                // };
+
+                //console.log("Name and amount: ", data);
+                //response.render('showExpenses', data);
+
+                db.expenses.getTransactions(userId, (err, expensesRes) => {
+                    if (err) {
+                        response.send(err)
+                    }
+
+                    else {
+                        let data = {
+                            nameAmount: nameAmountRes,
+                            userdata : expensesRes,
+                        };
+                        //console.log(result);
+                       // console.log("expenses transactions ", data)
+                        response.render('showExpenses', data);
+                    }
+                });
+            }
+        });
     }
 
+    let reportController =(request,response)=>{
+        response.render('monthlyReport');
+    }
 
+    let addController = (request,response)=>{
+        response.render('addTransactions');
+    }
 
- // //app.POST (home)
- //    let homePostController = (request, response) =>{
+   let addPostController = (request, response) => {
+};
 
- //         db.users.postExpenses(request.body, request.cookies, (err, result) => {
- //            if (err) {
- //                response.send(err)
-
- //             } else {
- //                response.redirect('/home')
- //            };
- //        });
- //    };
-
- // //app.GET (default home - not login)
- //    let rootController = (request, response) => {
- //        db.tweedr.showTweed(request.body, (err, result) => {
- //            if (err) {
- //                response.send(err)
- //            }
-
- //             else {
- //                let data = {
- //                    allTweeds : result.rows
- //                }
- //                response.render('tweedr/root', data);
- //            }
- //        });
- //    };
 
  //app.GET (logout)
     let logoutController = (request, response) => {
-        response.cookie('loggedIn', "nahh");
+        // response.cookie('loggedIn', 'nahh', { expires: new Date(Date.now() + 900000), httpOnly: true })
+        // response.cookie('loggedIn', "nahh");
+        // cookies.set('username', {expires: Date.now()});
+        response.cookie('loggedIn', 'nahh', { expires: new Date(Date.now()), httpOnly: true })
+        response.clearCookie('username');
+        console.log(response.cookie)
+        // response.clearCookie('username', { path: '/kaching/login' })
         response.redirect('/kaching/login')
     };
 
@@ -177,7 +213,11 @@ var d = new Date();
     registerPost: registerPostController,
     home: homeController,
     logout: logoutController,
-    expenses: expensesController
+    expenses: expensesController,
+    report : reportController,
+    add : addController,
+    addPost : addPostController,
+    logout : logoutController
   };
 
  }

@@ -1,0 +1,48 @@
+.dropstyle{
+	position: absolute;
+	will-change: transform;
+	top: 0px;
+	left: 0px;
+	transform: translate3d(0px, 40px, 0px);
+}
+
+.expensesCard{
+	width: 20rem;
+	height: 10em;
+}
+
+.cardTextData{
+	text-align: center;
+}
+
+.cardContainer{
+	height: 300px;
+}
+
+.imgBadge{
+	margin: 5px;
+}
+
+.footer-text{
+	font-size: 14px;
+
+}
+
+.footer{
+	background-color: #79c2ad;
+}
+
+.footer-row{
+	justify-content: center;
+}
+
+.transaction-table{
+	width:750px;
+}
+
+.addTransaction-wrapper, .buttonAddTrans {
+    border-radius: 5px;
+    width: 50%;
+    margin: 0px auto;
+    float: none;
+}

@@ -6,8 +6,8 @@
  module.exports = (dbPoolInstance) => {
 
     let registerUser = (userDetails, callback) => {
-        let text = "SELECT name FROM users WHERE name = $1";
-        let values = [userDetails.name];
+        let text = "SELECT username FROM users WHERE username = $1";
+        let values = [userDetails.username];
 
         dbPoolInstance.query(text, values, (error, result) => {
 
