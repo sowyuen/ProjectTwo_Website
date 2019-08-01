@@ -15,7 +15,7 @@ class ShowExpenses extends React.Component {
         var date = timestamp.slice(0, 15);
         return (
             <tr className="table-warning">
-                <th scope="row"><a href='#'><img className="types_icon"src={item.img} width="53px" height="53px"/></a></th>
+                <th scope="row"><a href='/kaching/home/expenses/change'><img className="types_icon"src={item.img} width="53px" height="53px"/></a></th>
                     <td>{item.category}</td>
                     <td>{item.description}</td>
                     <td>{item.amount}</td>
@@ -32,9 +32,12 @@ class ShowExpenses extends React.Component {
               <h3>JULY EXPENSES:</h3>
 
                 <div className="addTransaction-wrapper">
-                     <div className="col-md-4 text-center buttonAddTrans">
-                      <a role="button" className="btn btn-primary" href="/kaching/home/expenses/add">Add Transaction</a>
-                      </div>
+
+                <div className="row justify-content-center">
+                <a role="button" className="btn btn-warning  addButt" href="/kaching/home/expenses/add">Add Transaction</a>
+                <a role="button" className="btn btn-warning  backButt" href="/kaching/home">Home</a>
+                </div>
+
 
                         <div className ="transaction-table" >
                             <table className="table table-active ">

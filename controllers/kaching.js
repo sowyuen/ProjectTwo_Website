@@ -50,8 +50,8 @@ var d = new Date();
 
                     const data = {
                         userId: user_id,
-                        types: 5,
-                        description: '-',
+                        types: 6,
+                        description: 'Welcome to Kaching!',
                         amount: '$0'
                     }
 
@@ -185,7 +185,15 @@ var d = new Date();
     }
 
    let addPostController = (request, response) => {
-};
+    };
+
+    let changeController = (request,response) =>{
+        response.render('changeDetails');
+    }
+
+    let learnMoreController = (request,response) =>{
+        response.render('learnMore');
+    }
 
 
  //app.GET (logout)
@@ -217,7 +225,9 @@ var d = new Date();
     report : reportController,
     add : addController,
     addPost : addPostController,
-    logout : logoutController
+    logout : logoutController,
+    change : changeController,
+    learnMore : learnMoreController
   };
 
  }

@@ -3,7 +3,7 @@ INSERT INTO types(category,img) VALUES('TRANSPORT','https://cdn4.iconfinder.com/
 INSERT INTO types(category,img) VALUES('BILLS','https://image.flaticon.com/icons/png/512/1365/1365895.png');
 INSERT INTO types(category,img) VALUES('ENTERTAINMENT','https://cdn1.iconfinder.com/data/icons/news-and-media-solid-the-world-today/512/Entertainment_News-512.png');
 INSERT INTO types(category,img) VALUES('OTHERS','/kaching.png');
-
+INSERT INTO types(category,img) VALUES('KACHING','https://cdn4.iconfinder.com/data/icons/emoji-filled-line/32/emoji-icon-color-01-512.png');
 
 INSERT INTO expenses(users_id,types_id,amount,description) VALUES(4,1,'$2.50','LUNCH-CHICKEN RICE');
 INSERT INTO expenses(users_id,types_id,amount,description) VALUES(4,2,'$1.25','MRT + BUS');

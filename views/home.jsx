@@ -13,7 +13,7 @@ class Home extends React.Component {
                   <hr className="my-4"/>
                   <p className="text-info">"Money, like emotions, is something you must control to keep your life on the right track" -Natasha Munson</p>
                   <p className="lead">
-                  <a className="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                  <a className="btn btn-primary btn-lg" href="/kaching/learnMore" role="button">Learn more</a>
                   </p>
             </div>
 

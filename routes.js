@@ -30,4 +30,8 @@ module.exports = (app, allModels) => {
 
   app.get('/kaching/login',kachingControllerCallbacks.logout);
 
+  app.get('/kaching/home/expenses/change',kachingControllerCallbacks.change);
+
+  app.get('/kaching/learnMore',kachingControllerCallbacks.learnMore);
+
 };
