@@ -2,7 +2,7 @@ module.exports = (dbPoolInstance) => {
 
     let getTransactions = (userId,callback) =>{
         console.log("just checking");
-        let text = "SELECT types.img,types.category, expenses.description, expenses.amount, expenses.create_date FROM types INNER JOIN expenses ON (types.id = expenses.types_id) WHERE expenses.users_id = $1 ORDER BY expenses.create_date DESC"
+        let text = "SELECT types.img,types.category, expenses.description, expenses.amount, expenses.create_date, expenses.id FROM types INNER JOIN expenses ON (types.id = expenses.types_id) WHERE expenses.users_id = $1 ORDER BY expenses.create_date DESC"
         let values =[userId];
 
         dbPoolInstance.query(text,values,(error, result) => {
@@ -19,48 +19,63 @@ module.exports = (dbPoolInstance) => {
         });
     }
 
-//     let getSelectedTransactions = (userId,callback) =>{
-//         console.log("just checking");
-//         // let text = "SELECT types.img,types.category, expenses.description, expenses.amount, expenses.create_date FROM types INNER JOIN expenses ON (types.id = expenses.types_id) WHERE expenses.users_id ="+ parseInt(request.params.id);
-//         // let values =[userId];
-// let text = "SELECT types.img,types.category, expenses.description, expenses.amount, expenses.create_date FROM types INNER JOIN expenses ON (types.id = expenses.types_id) WHERE expenses.users_id = $1 "
-//         let values =[userId];
+let editSelectedTransactions = (data,callback) =>{
+       console.log("just checking");
+        // console.log("modelsssss",data);
+       let text = "UPDATE expenses SET types_id =$1, description=$2,amount=$3 WHERE id =$4 RETURNING *";
+       console.log('test');
+       console.log("DATA",data);
+       console.log("jshdajshda",data.types_id);
+       let values = [data.typesId, data.description, data.amount,data.expensesId];
+       console.log('values', values);
+       dbPoolInstance.query(text,values,(error, result) => {
+           if( error ){
+               console.log("err1 ST")
+               callback(error, null);
+           } else {
+               console.log("OKAY ST")
+               console.log(result)
+               console.log(result.rows)
+               callback(null, result.rows);
+           }
+       });
+   }
 
-//         dbPoolInstance.query(text,values,(error, result) => {
-//             if( error ){
-//                 console.log("err1 ST")
-//                 callback(error, null);
+   let showTransactionEdit = (data, callback) => {
+        let text = "SELECT * FROM expenses WHERE id = $1";
+        const value = [data.id];
+           dbPoolInstance.query(text, value, (error, result) => {
+            if( error ){
+                console.log("err1")
+                console.log(error);
+                callback(error, null);
 
-//             } else {
-//                 console.log("OKAY ST")
-//                 console.log(result)
-//                 console.log(result.rows)
-//                 callback(null, result.rows);
-//             }
-//         });
-//     }
+            } else {
+                console.log("OKAY")
+                console.log("getNameAndAmount ",result.rows)
+                callback(null, result.rows[0]);
+            }
+        });
 
-    //     let editSelectedTransactions = (userId,callback) =>{
-    //     console.log("just checking");
-    // // let text = "UPDATE expenses,types SET types.category=$1, expenses.description=$2, expenses.amount=$3 FROM expenses INNER JOIN types ON (types.id = expenses.types_id) WHERE expenses.users_id ="+ parseInt(request.params.id);
-    //     let text = "UPDATE expenses SET types_id =$1, description=$2,amount=$3 WHERE types_id =$4";
-    //     let value = [request.body.types_id, request.body.description, request.body.amount,request.body.types_id];
+   }
 
-    //     dbPoolInstance.query(text,values,(error, result) => {
-    //         if( error ){
-    //             console.log("err1 ST")
-    //             callback(error, null);
+   let deleteTransaction = (data, callback) =>{
+    let text = "DELETE FROM expenses WHERE id = $1";
+    const value = [data.expensesId];
+    dbPoolInstance.query(text, value, (error, result) => {
+            if( error ){
+                console.log("err1")
+                console.log(error);
+                callback(error, null);
 
-    //         } else {
-    //             console.log("OKAY ST")
-    //             console.log(result)
-    //             console.log(result.rows)
-    //             callback(null, result.rows);
-    //         }
-    //     });
-    // }
+            } else {
+                console.log("OKAY")
+                console.log("getNameAndAmount ",result.rows)
+                callback(null, result.rows[0]);
+            }
+        });
 
-
+   }
     let getNameAndAmount = (username, callback) => {
         console.log("just to knw tat we reach here")
         console.log(username);
@@ -76,7 +91,7 @@ module.exports = (dbPoolInstance) => {
             } else {
                 console.log("OKAY")
                 console.log("getNameAndAmount ",result.rows)
-                callback(null, result.rows[0]);
+                callback(null, result.rows);
             }
         });
     }
@@ -129,8 +144,9 @@ module.exports = (dbPoolInstance) => {
         getNameAndAmount,
         registerNewUser,
         getTransactions,
-        addTransactions
-        // getSelectedTransactions
-        // editSelectedTransactions
+        addTransactions,
+        editSelectedTransactions,
+        showTransactionEdit,
+        deleteTransaction
     };
 };

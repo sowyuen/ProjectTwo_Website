@@ -3,8 +3,10 @@ var DefaultLayout = require('./layout/default');
 
 class ChangeDetails extends React.Component {
   render() {
-    let item = this.props.editData;
-    // let actionURL = "/kaching/home/expenses/"+item.id+"?_method=PUT"
+    let item = this.props.result;
+    console.log('RESULT HERE');
+    console.log(this.props.result);
+    let url = "/kaching/home/expenses/" + this.props.id+"?_method=PUT";
 
     return (
         <DefaultLayout>
@@ -12,7 +14,7 @@ class ChangeDetails extends React.Component {
 
                 <div className="border border-warning justify-content-center borderAdd">
                   <h3>Edit/Delete:</h3>
-                    <form method="PUT" action="/kaching/home/expenses/edit">
+                    <form method="POST" action={url}>
 
                         <div className="form-group">
                         <div className="row catBad">
@@ -21,27 +23,27 @@ class ChangeDetails extends React.Component {
                         </div>
                         <div className="form-check-inline">
                               <label className="form-check-label">
-                              <input type="radio" className="form-check-input" name="optionsRadios"value="option1" checked=""/><img src="https://png.pngtree.com/svg/20170208/be6783b29c.png" width="35" height="35" alt="Kaching!"/> Food
+                              <input type="radio" className="form-check-input" name="optionsRadios"value="option1" checked={this.props.result.types_id === 1}/><img src="https://png.pngtree.com/svg/20170208/be6783b29c.png" width="35" height="35" alt="Kaching!"/> Food
                               </label>
                                 </div>
                                 <div className="form-check-inline">
                                   <label className="form-check-label">
-                                  <input type="radio" className="form-check-input" name="optionsRadios"value="option2"/><img src="https://cdn4.iconfinder.com/data/icons/transportation-lineal-color-set-version-two/512/Transport_Bus_Lineal_Color-512.png" width="35" height="35" alt="Kaching!"/> Transport
+                                  <input type="radio" className="form-check-input" name="optionsRadios"value="option2" checked={this.props.result.types_id === 2}/><img src="https://cdn4.iconfinder.com/data/icons/transportation-lineal-color-set-version-two/512/Transport_Bus_Lineal_Color-512.png" width="35" height="35" alt="Kaching!"/> Transport
                                   </label>
                                 </div>
                                 <div className="form-check-inline">
                                   <label className="form-check-label">
-                                  <input type="radio" className="form-check-input" name="optionsRadios"value="option3"/><img src="https://image.flaticon.com/icons/png/512/1365/1365895.png" width="35" height="35" alt="Kaching!"/> Bills
+                                  <input type="radio" className="form-check-input" name="optionsRadios"value="option3" checked={this.props.result.types_id === 3}/><img src="https://image.flaticon.com/icons/png/512/1365/1365895.png" width="35" height="35" alt="Kaching!"/> Bills
                                   </label>
                                 </div>
                                 <div className="form-check-inline">
                                   <label className="form-check-label">
-                                  <input type="radio" className="form-check-input" name="optionsRadios"value="option4"/><img src="https://cdn1.iconfinder.com/data/icons/news-and-media-solid-the-world-today/512/Entertainment_News-512.png" width="35" height="35" alt="Kaching!"/> Entertainment
+                                  <input type="radio" className="form-check-input" name="optionsRadios"value="option4" checked={this.props.result.types_id === 4}/><img src="https://cdn1.iconfinder.com/data/icons/news-and-media-solid-the-world-today/512/Entertainment_News-512.png" width="35" height="35" alt="Kaching!"/> Entertainment
                                   </label>
                                 </div>
                                 <div className="form-check-inline">
                                   <label className="form-check-label">
-                                  <input type="radio" className="form-check-input" name="optionsRadios"value="option5"/><img src="/kaching.png" width="35" height="35" alt="Kaching!"/> Others
+                                  <input type="radio" className="form-check-input" name="optionsRadios"value="option5" checked={this.props.result.types_id === 5}/><img src="/kaching.png" width="35" height="35" alt="Kaching!"/> Others
                                   </label>
                                 </div>
 
@@ -53,7 +55,7 @@ class ChangeDetails extends React.Component {
                                 <div className="row justify-content-center">
                                     <img src="https://ya-webdesign.com/images/cartoon-money-bag-png-2.png" width="35" height="35" alt="Kaching!" className="imgMoney"/>
                                     <div className="form-group col-xs moneyInput">
-                                        <input type="text" className="form-control" placeholder="$0.00" id="inputDefault"/>
+                                        <input type="text" className="form-control" name="amount" placeholder="$0.00" id="inputDefault" value={this.props.result.amount}/>
                                     </div>
                                 </div>
 
@@ -65,16 +67,17 @@ class ChangeDetails extends React.Component {
                                 <div className="row justify-content-center">
                                     <img src="https://cdn1.iconfinder.com/data/icons/education-set-01/512/document-info-512.png" width="35" height="35" alt="Kaching!" className="imgMoney"/>
                                     <div className="form-group col-l desInput">
-                                        <input type="text" className="form-control" placeholder="lunch" id="inputDefault"/>
+                                        <input type="text" className="form-control" name="description" placeholder="lunch" id="inputDefault" value={this.props.result.description}/>
                                     </div>
                                 </div>
-                                <a role="button" className="btn btn-warning addButt" href="#">Add</a>
                                 <button type="submit" className="btn btn-warning">Update Transaction</button>
 
-                                <button type="submit" className="btn btn-warning">Delete Transaction</button>
-                                <a role="button" className="btn btn-warning addButt" href="/kaching/home/expenses">Back</a>
                         </div>
                     </form>
+                    <form method="POST" action={`/kaching/home/expenses/${this.props.id}?_method=DELETE`}>
+                        <button type="submit" className="btn btn-warning">Delete Transaction</button>
+                    </form>
+                    <a role="button" className="btn btn-warning addButt" href="/kaching/home/expenses">Back</a>
                     </div>
 
             </div>

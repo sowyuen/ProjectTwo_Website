@@ -116,8 +116,13 @@ module.exports = (db) => {
 
         else {
             console.log("test")
+            let amountSum = 0;
+            for (let i = 0; i < result.length; i++) {
+                amountSum += result[i].amount;
+            }
             let data = {
-                userdata : result
+                name: result[0].name,
+                amountSum: amountSum.toFixed(2)
             };
             console.log(result);
             response.render('home', data);
@@ -209,47 +214,74 @@ let addPostController = (request, response) =>{
         });
     }
 
-//app.GET (edit)
-    // let editController = (request,response) =>{
-//         console.log("PLEASE WORK")
-//             db.expenses.getSelectedTransactions(request.params.id, (err, result) => {
-//                         if (err) {
-//                             response.send(err)
-//                         }
-
-//                         else {
-//                             let data = {
-//                                 editData: result.rows[0],
-//                                 cookies: request.cookies
-//                            };
-//                             response.render('changeDetails', data);
-//                         }
-//                     });
-// }
-
-    let editController = (request,response) =>{
-        response.render('changeDetails');
+let editController = (request,response) =>{
+   var data = {
+       id : request.params.id
+   }
+   db.expenses.showTransactionEdit(data, (err, result) => {
+    if (err) {
+        response.send(err);
+    } else {
+        console.log('result');
+        console.log(result);
+        response.render('changeDetails', {result, id: request.params.id});
     }
+   });
+  }
 
-// //app PUT (Edit)
-//     let editPostController = (request,response) =>{
-//      db.expenses.editSelectedTransactions(request.params.id, (err, result) => {
+let editPostController = (request,response) =>{
+    console.log("editpost",request.params.id);
+        var uId = request.cookies.user_id;
+        var exId = request.params.id;
+        console.log(uId);
+        console.log('request.params', exId);
+        //response.send(request.body)
 
-//      if (err) {
-//         console.error('query error:', err.stack);
-//         res.send('query error');
-//     } else {
-//         let data = {
-//             artists: result.rows[0],
-//             cookies: request.cookies
-//         };
+        const userinput = request.body;
+        let types;
 
-//         response.render('showExpenses', data);
-//     }
-// });
-//     }
+        if(userinput.optionsRadios === "option1"){
+            types = 1;
+            //food
+        }
+        else if(userinput.optionsRadios === "option2"){
+            types = 2;
+            //transport
+        }
+        else if(userinput.optionsRadios === "option3"){
+            types = 3;
+            //bills
+        }
+        else if(userinput.optionsRadios === "option4"){
+            types = 4;
+            //entertainment
+        }
+        else if(userinput.optionsRadios === "option5"){
+            types = 5;
+            //others
+        }
 
+        var data = {
+            userId: uId,
+            typesId: types,
+            description: userinput.description,
+            amount: userinput.amount,
+            expensesId : exId
+        }
 
+    db.expenses.editSelectedTransactions(data, (err, result) => {
+    if (err) {
+       console.error('query error:', err.stack);
+       response.send('query error');
+   } else {
+       // console.log("edit post result rows!!",this.result.rows[0]);
+        // console.log("ccccc",request.body)
+        response.redirect("/kaching/home/expenses");
+       // response.send("yes")
+     }
+    });
+
+}
 
 //app.GET (report)
 let reportController =(request,response)=>{
@@ -259,6 +291,23 @@ let reportController =(request,response)=>{
 //app.GET (learnMore)
 let learnMoreController = (request,response) =>{
         response.render('learnMore');
+}
+
+//app.DELETE
+let deleteTransactionController = (request,response) =>{
+    var exId = request.params.id;
+    var data = {
+        expensesId : exId
+    }
+    db.expenses.deleteTransaction(data,(err,result)=>{
+
+        if (err) {
+            console.error('query error:', err.stack);
+            response.send('query error');
+        } else {
+            response.redirect('/kaching/home/expenses');
+        }
+    })
 }
 
  //app.GET (logout)
@@ -308,7 +357,9 @@ let learnMoreController = (request,response) =>{
     addPost : addPostController,
     logout : logoutController,
     edit : editController,
-    learnMore : learnMoreController
+    editPost: editPostController,
+    learnMore : learnMoreController,
+    delete: deleteTransactionController
 };
 
 }

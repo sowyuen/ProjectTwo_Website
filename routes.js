@@ -35,13 +35,14 @@ module.exports = (app, allModels) => {
   app.post('/kaching/home/expenses/add',kachingControllerCallbacks.addPost);
 
 //edit
-  app.get('/kaching/home/expenses/edit',kachingControllerCallbacks.edit);
-//  app.put('/kaching/home/expenses/:id',kachingControllerCallbacks.editPost);
-
+  app.get('/kaching/home/expenses/:id/edit',kachingControllerCallbacks.edit);
+  app.put('/kaching/home/expenses/:id',kachingControllerCallbacks.editPost);
 
 //graphs,piechart,budgeting
   app.get('/kaching/home/report',kachingControllerCallbacks.report);
   app.get('/kaching/learnMore',kachingControllerCallbacks.learnMore);
 
+//delete
+app.delete('/kaching/home/expenses/:id',kachingControllerCallbacks.delete);
 
 };

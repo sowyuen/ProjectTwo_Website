@@ -26,16 +26,18 @@ class ShowExpenses extends React.Component {
 
     let transactions = this.props.userdata.map(item=>{
 
-        let url = '/expenses/' + item.id;
+        let url = '/kaching/home/expenses/' + item.id +'/edit';
+        console.log("showexp id", item.id)
+
         var timestamp = item.create_date.toString();
         var date = timestamp.slice(0, 15);
         return (
             <div>
                 <tr className="table-warning">
-                    <th scope="row"><a href='/kaching/home/expenses/edit'><img className="types_icon"src={item.img} width="53px" height="53px"/></a></th>
-                        <td><a className="aShow" href='/kaching/home/expenses/:id/edit'>{item.category}</a></td>
-                        <td><a className="aShow" href='/kaching/home/expenses/:id/edit'>{item.description}</a></td>
-                        <td>$ <a className="aShow" href='/kaching/home/expenses/:id/edit'>{item.amount.toFixed(2)}</a></td>
+                    <th scope="row"><a href={url}><img className="types_icon"src={item.img} width="53px" height="53px"/></a></th>
+                        <td><a className="aShow" href={url}>{item.category}</a></td>
+                        <td><a className="aShow" href={url}>{item.description}</a></td>
+                        <td>$ <a className="aShow" href={url}>{item.amount.toFixed(2)}</a></td>
                         <td>{date}</td>
                 </tr>
             </div>
@@ -48,6 +50,7 @@ class ShowExpenses extends React.Component {
         <DefaultLayout>
 
         <h3>{currentMonth} Expenses:</h3>
+        <h3>${this.props.amountSum}</h3>
 
           <div className="container-fluid">
 
