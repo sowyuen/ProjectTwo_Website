@@ -16,7 +16,6 @@ CREATE TABLE IF NOT EXISTS expenses (
     users_id INTEGER,
     types_id INTEGER,
     description TEXT,
-    amount TEXT,
-    create_date DATE DEFAULT now(),
-    create_month DATE
+    amount FLOAT(8),
+    create_date DEFAULT CURRENT_TIMESTAMP
 );

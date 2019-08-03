@@ -60,8 +60,13 @@
         });
     }
 
+    let logoutUser =(callback) =>{
+        console.log("logging out!");
+    }
+
     return {
         registerUser,
-        loginUser
+        loginUser,
+        logoutUser
     };
 };

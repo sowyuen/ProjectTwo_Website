@@ -21,7 +21,7 @@ class Home extends React.Component {
             <div className="card border-warning d-inline-block border-primary mb-3 mx-2 expensesCard">
               <div className="card-header">Expenses</div>
               <div className="card-body">
-              <h3 className="card-title cardTextData"><a href='/kaching/home/expenses'>{this.props.userdata.amount}</a></h3>
+              <h3 className="card-title cardTextData"><a href='/kaching/home/expenses'>${this.props.userdata.amount}</a></h3>
               </div>
             </div>
 

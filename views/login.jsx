@@ -8,14 +8,16 @@ class Login extends React.Component {
       <link rel="stylesheet" type="text/css" href="/bootstrap.css"/>
         <head />
         <body>
-          <h3>Welcome Back!</h3>
-          <h3> Login to your Kaching</h3>
-          <form method="POST" action="/kaching/login">
-          <p> Username: <input type="text" name="username"/> </p>
-          <p> Password: <input type="password" name="password"/> </p>
-          <button type="submit" className="btn btn-primary">Login</button>
-          <p>Don't have an account? <a href="/kaching/register">Sign up</a></p>
-          </form>
+          <div className="loginForm">
+              <h3>Welcome Back!</h3>
+              <h3> Login to your Kaching</h3>
+              <form method="POST" action="/kaching/login">
+              <p> Username: <input type="text" name="username"/> </p>
+              <p> Password: <input type="password" name="password"/> </p>
+              <button type="submit" className="btn btn-primary">Login</button>
+              <p>Don't have an account? <a href="/kaching/register">Sign up</a></p>
+              </form>
+          </div>
         </body>
       </html>
     );

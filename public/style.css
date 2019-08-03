@@ -57,25 +57,51 @@
 	margin: 9px;
 }
 
-.moneyInput, .desInput, .imgMoney, .formCat, .addButt, .backButt, .catBad{
-	margin: 8px;
-	padding: 5px;
+.moneyInput, .desInput, .imgMoney, .formCat, .addButt, .backButt{
+	margin: 5px;
+	padding: 2px;
 }
 
 h3{
-	padding: 8px;
+	padding: 5px;
 
 }
 
 .container-fluid-addTrans{
-	height: 550px;
+	height: 500px;
 	width: 800px;
  	justify-content: center;
+ 	margin: 0 auto;
+ 	padding: 30px;
 
 }
 
-.catBad, .borderAdd{
+ .borderAdd{
 	 text-align: center;
 	 justify-content: center;
 	 margin: 25px;
+}
+
+.catBad{
+	text-align: center;
+	justify-content: center;
+	margin: 7px;
+}
+
+.test{
+	position: absolute;
+	 will-change: transform;
+	 top: 0px;
+	 left: 0px;
+	 transform: translate3d(0px, 38px, 0px);
+}
+
+.loginForm{
+	margin: 0 auto;
+ 	padding: 30px;
+ 	width: 50%;
+}
+
+.aShow{
+	color: white;
 }
