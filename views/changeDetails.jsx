@@ -70,10 +70,10 @@ class ChangeDetails extends React.Component {
                                         <input type="text" className="form-control" name="description" placeholder="lunch" id="inputDefault" value={this.props.result.description}/>
                                     </div>
                                 </div>
-                                <button type="submit" className="btn btn-warning">Update Transaction</button>
-
+                                <button type="submit" className="btn btn-warning ">Update Transaction</button>
                         </div>
                     </form>
+
                     <form method="POST" action={`/kaching/home/expenses/${this.props.id}?_method=DELETE`}>
                         <button type="submit" className="btn btn-warning">Delete Transaction</button>
                     </form>

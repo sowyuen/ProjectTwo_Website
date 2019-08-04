@@ -113,3 +113,35 @@ h3{
   height:220px;*/
 
 }
+
+.cButton{
+	display: inline;
+	    vertical-align:top;
+    text-align:center;
+}
+
+.three{
+	color:green;
+}
+
+.wrapTips{
+	width: 90%;
+	height: 600px;
+}
+
+.container-fluid-savings{
+	width: 50%;
+	height: 60%;
+	margin: 0 auto;
+}
+
+.video{
+	width:700px ;
+	height:400px;
+	margin: 0 auto;
+}
+
+.source{
+	font-size: 12px;
+	text-align: center;
+}
