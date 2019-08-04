@@ -5,7 +5,7 @@ INSERT INTO types(category,img) VALUES('ENTERTAINMENT','https://cdn1.iconfinder.
 INSERT INTO types(category,img) VALUES('OTHERS','/kaching.png');
 INSERT INTO types(category,img) VALUES('KACHING','https://cdn4.iconfinder.com/data/icons/emoji-filled-line/32/emoji-icon-color-01-512.png');
 
-INSERT INTO expenses(users_id,types_id,amount,description) VALUES(4,1,'$2.50','LUNCH-CHICKEN RICE');
+INSERT INTO expenses(users_id,types_id,amount,description) VALUES(4,1,2.50,'LUNCH-CHICKEN RICE');
 INSERT INTO expenses(users_id,types_id,amount,description) VALUES(4,2,'$1.25','MRT + BUS');
 INSERT INTO expenses(users_id,types_id,amount,description) VALUES(4,3,'$75','STARHUB');
 INSERT INTO expenses(users_id,types_id,amount,description) VALUES(4,4,'$11.90','MOVIE');
