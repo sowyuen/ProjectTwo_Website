@@ -12,12 +12,12 @@ module.exports = (db) => {
    */
 
  //app.GET (register)
- let registerController = (request, response) => {
+let registerController = (request, response) => {
     response.render('register');
 };
 
  //app.POST (register)
- let registerPostController = (request, response) => {
+let registerPostController = (request, response) => {
 
    let hashedPassword = sha256( request.body.password + SALT );
 
@@ -57,21 +57,20 @@ module.exports = (db) => {
                     }
                 }
             })
-
         } else {
             response.render('components/usernameTaken');
         }
     }
-});
+    });
 };
 
  //app.GET (login)
- let loginController = (request, response) => {
+let loginController = (request, response) => {
     response.render('login');
 };
 
  // app.POST (login)
- let loginPostController = (request, response) => {
+let loginPostController = (request, response) => {
     let hashedPassword = sha256( request.body.password + SALT );
     request.body.password = hashedPassword;
     var user = request.body;
@@ -100,35 +99,35 @@ module.exports = (db) => {
     });
 };
 
-
  //app.GET (home)
- let homeController = (request, response) => {
+let homeController = (request, response) => {
    if( request.cookies.loggedIn === undefined || request.cookies.loggedIn === "nahh" ){
     response.render('/');
-}else{
-    console.log(request.cookies.user_name);
-    var username = request.cookies.user_name;
-    console.log(username);
-    db.expenses.getNameAndAmount(username, (err, result) => {
-        if (err) {
-            response.send(err)
-        }
-
-        else {
-            console.log("test")
-            let amountSum = 0;
-            for (let i = 0; i < result.length; i++) {
-                amountSum += result[i].amount;
+    }
+    else{
+        console.log(request.cookies.user_name);
+        var username = request.cookies.user_name;
+        console.log(username);
+        db.expenses.getNameAndAmount(username, (err, result) => {
+            if (err) {
+                response.send(err)
             }
-            let data = {
-                name: result[0].name,
-                amountSum: amountSum.toFixed(2)
-            };
-            console.log(result);
-            response.render('home', data);
-        }
-    });
-};
+
+            else {
+                console.log("test")
+                let amountSum = 0;
+                for (let i = 0; i < result.length; i++) {
+                    amountSum += result[i].amount;
+                }
+                let data = {
+                    name: result[0].name,
+                    amountSum: amountSum.toFixed(2)
+                };
+                console.log(result);
+                response.render('home', data);
+            }
+        });
+    };
 };
 
 //app.GET (expenses)
@@ -148,11 +147,27 @@ let expensesController = (request,response)=>{
                 }
 
                 else {
-                    let data = {
-                        nameAmount: nameAmountRes,
-                        userdata : expensesRes,
-                    };
-                    response.render('showExpenses', data);
+                    var username = request.cookies.user_name;
+                    db.expenses.getNameAndAmount(username, (err, result) => {
+                        if (err) {
+                            response.send(err)
+                        }
+
+                        else {
+                            console.log("test12345")
+                            let amountSum = 0;
+                                for (let i = 0; i < result.length; i++) {
+                                    amountSum += result[i].amount;
+                                }
+                            let data = {
+                                nameAmount: nameAmountRes,
+                                userdata : expensesRes,
+                                amountSum: amountSum.toFixed(2)
+                            };
+                            console.log(result);
+                            response.render('showExpenses', data);
+                        }
+                    });
                 }
             });
         }
@@ -214,6 +229,7 @@ let addPostController = (request, response) =>{
         });
     }
 
+//app.GET (edit)
 let editController = (request,response) =>{
    var data = {
        id : request.params.id
@@ -227,8 +243,9 @@ let editController = (request,response) =>{
         response.render('changeDetails', {result, id: request.params.id});
     }
    });
-  }
+}
 
+//app.PUT (edit)
 let editPostController = (request,response) =>{
     console.log("editpost",request.params.id);
         var uId = request.cookies.user_id;
@@ -352,13 +369,13 @@ let deleteTransactionController = (request,response) =>{
     home: homeController,
     logout: logoutController,
     expenses: expensesController,
-    report : reportController,
-    add : addController,
-    addPost : addPostController,
-    logout : logoutController,
-    edit : editController,
+    report: reportController,
+    add: addController,
+    addPost: addPostController,
+    logout: logoutController,
+    edit: editController,
     editPost: editPostController,
-    learnMore : learnMoreController,
+    learnMore: learnMoreController,
     delete: deleteTransactionController
 };
 

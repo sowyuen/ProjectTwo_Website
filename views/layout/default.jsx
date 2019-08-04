@@ -8,12 +8,12 @@ class DefaultLayout extends React.Component {
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossOrigin="anonymous"/>
           <link rel="stylesheet" type="text/css" href="/bootstrap.css"/>
           <link rel="stylesheet" type="text/css" href="/style.css"/>
-
+          <title>KAching!</title>
       </head>
             <body>
                 <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
                     <a className="navbar-brand" href="/kaching/home">
-                    <img src="/kaching.png" width="50" height="43" alt="Kaching!"/>Kaching!
+                    <img src="/kaching.png" width="50" height="43" alt="Kaching!"/>KAching!
                     </a>
 
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,6 +35,17 @@ class DefaultLayout extends React.Component {
                         </ul>
                     </div>
 
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                        <div class="dropdown-menu" x-placement="bottom-start">
+                          <a class="dropdown-item" href="#">Action</a>
+                          <a class="dropdown-item" href="#">Another action</a>
+                          <a class="dropdown-item" href="#">Something else here</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
+                      </li>
+
                     <ul className="navbar-nav mr-auto">
                       <li className="nav-item">
                       <a role="button" className="btn btn-primary backButt" href="/kaching/login">Logout</a>
@@ -52,7 +63,7 @@ class DefaultLayout extends React.Component {
                     </div>
 
                     <div className="row footer-text footer-row">
-                        <p>Now available on Appstore and Googleplay! Download your Kaching today!</p>
+                        <p>Now available on Appstore and Googleplay! Download your KAching today!</p>
                     </div>
 
                     <div className="row footer-row">
