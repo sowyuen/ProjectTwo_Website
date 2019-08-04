@@ -13,6 +13,9 @@ module.exports = (app, allModels) => {
   // require the controller
   const kachingControllerCallbacks = require('./controllers/kaching')(allModels);
 
+// ('/')
+app.get('/',kachingControllerCallbacks.starter);
+
 //register
   app.get('/kaching/register', kachingControllerCallbacks.register);
   app.post('/kaching/register', kachingControllerCallbacks.registerPost);

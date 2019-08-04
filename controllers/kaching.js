@@ -10,6 +10,10 @@ module.exports = (db) => {
    * Controller logic
    * ===========================================
    */
+let starterController = (request,response) => {
+    response.redirect('/kaching/login');
+}
+
 
  //app.GET (register)
 let registerController = (request, response) => {
@@ -376,7 +380,8 @@ let deleteTransactionController = (request,response) =>{
     edit: editController,
     editPost: editPostController,
     learnMore: learnMoreController,
-    delete: deleteTransactionController
+    delete: deleteTransactionController,
+    starter: starterController
 };
 
 }
