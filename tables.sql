@@ -17,5 +17,5 @@ CREATE TABLE IF NOT EXISTS expenses (
     types_id INTEGER,
     description TEXT,
     amount FLOAT(8),
-    create_date DEFAULT CURRENT_TIMESTAMP
+    create_date timestamp DEFAULT CURRENT_TIMESTAMP
 );
