@@ -32,8 +32,8 @@ User flow for a non existing user would be:
 - The user can then choose to edit or delete any transaction by clicking on it, it will then render a page for them to choose if they want to delete it or edit it
 
 # Technologies Used
-Node.js
-Express
-React
-PostgreSQL
-Chart.js
+- Node.js
+- Express
+- React
+- PostgreSQL
+- Chart.js
