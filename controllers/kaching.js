@@ -14,6 +14,68 @@ let starterController = (request,response) => {
     response.redirect('/kaching/login');
 }
 
+ //app.GET (statistics)
+let statisticsController = (request, response) => {
+   if( request.cookies.loggedIn === undefined || request.cookies.loggedIn === "nahh" ){
+    response.render('/');
+    }
+    else{
+        console.log(request.cookies.user_name);
+        var username = request.cookies.user_name;
+        console.log(username);
+        db.expenses.getNameAndAmount(username, (err, result) => {
+            if (err) {
+                response.send(err)
+            }
+
+            else {
+                console.log("HOME test")
+                console.log("HOME RESULT",result);
+                console.log("HAHAHH", result[0]);
+
+                let foodSum= 0;
+                let transportSum= 0;
+                let billSum= 0;
+                let entertainmentSum= 0;
+                let othersSum= 0;
+                result.map(entry =>{
+                    if(entry.types_id === 1){
+                        foodSum = foodSum + entry.amount
+                    }
+                    if(entry.types_id === 2){
+                        transportSum = transportSum + entry.amount
+                    }
+                    if(entry.types_id === 3){
+                        billSum = billSum + entry.amount
+                    }
+                    if(entry.types_id === 4){
+                        entertainmentSum = entertainmentSum + entry.amount
+                    }
+                    if(entry.types_id === 5){
+                        othersSum = othersSum + entry.amount
+                    }
+                })
+
+                let amountSum = 0;
+                for (let i = 0; i < result.length; i++) {
+                    amountSum += result[i].amount;
+                }
+
+                let data = {
+                    name: result[0].name,
+                    amountSum: amountSum.toFixed(2),
+                    foodSum: foodSum.toFixed(2),
+                    transportSum: transportSum.toFixed(2),
+                    billSum: billSum.toFixed(2),
+                    entertainmentSum: entertainmentSum.toFixed(2),
+                    othersSum: othersSum.toFixed(2)
+                };
+                response.render('statistics', data);
+            }
+        });
+    };
+};
+
 
  //app.GET (register)
 let registerController = (request, response) => {
@@ -26,7 +88,7 @@ let registerPostController = (request, response) => {
    let hashedPassword = sha256( request.body.password + SALT );
 
    request.body.password = hashedPassword;
-   console.log("jhagsjd")
+   console.log("REGISTER POST")
 
    db.users.registerUser(request.body, (err, result) => {
     if (err) {
@@ -78,13 +140,13 @@ let loginPostController = (request, response) => {
     let hashedPassword = sha256( request.body.password + SALT );
     request.body.password = hashedPassword;
     var user = request.body;
-    console.log("YIYIYI");
+    console.log("LOGIN POST");
     db.users.loginUser(user, (err, result) => {
         if (err) {
             response.send(err)
 
         } else {
-            console.log("test2")
+            console.log("LON IN POST test2")
             console.log(result.rows[0].password);
             if(result.rows[0].password === hashedPassword) {
                 let userId = result.rows[0].id;
@@ -118,16 +180,54 @@ let homeController = (request, response) => {
             }
 
             else {
-                console.log("test")
+                console.log("HOME test")
+                console.log("HOME RESULT",result);
+                console.log("HAHAHH", result[0]);
+
+                let foodSum= 0;
+                let transportSum= 0;
+                let billSum= 0;
+                let entertainmentSum= 0;
+                let othersSum= 0;
+                result.map(entry =>{
+                    if(entry.types_id === 1){
+                        foodSum = foodSum + entry.amount
+                    }
+                    if(entry.types_id === 2){
+                        transportSum = transportSum + entry.amount
+                    }
+                    if(entry.types_id === 3){
+                        billSum = billSum + entry.amount
+                    }
+                    if(entry.types_id === 4){
+                        entertainmentSum = entertainmentSum + entry.amount
+                    }
+                    if(entry.types_id === 5){
+                        othersSum = othersSum + entry.amount
+                    }
+                })
+
                 let amountSum = 0;
                 for (let i = 0; i < result.length; i++) {
                     amountSum += result[i].amount;
                 }
+
+                // let foodSum = 0;
+                // if(types_id ===1){
+                //     for(let i = 0; i<result.length; i++){
+                //         foodSum += result[i].types_id;
+                //     }
+                // }
+
                 let data = {
                     name: result[0].name,
-                    amountSum: amountSum.toFixed(2)
+                    amountSum: amountSum.toFixed(2),
+                    foodSum: foodSum.toFixed(2),
+                    transportSum: transportSum.toFixed(2),
+                    billSum: billSum.toFixed(2),
+                    entertainmentSum: entertainmentSum.toFixed(2),
+                    othersSum: othersSum.toFixed(2)
                 };
-                console.log(result);
                 response.render('home', data);
             }
         });
@@ -381,7 +481,8 @@ let deleteTransactionController = (request,response) =>{
     editPost: editPostController,
     learnMore: learnMoreController,
     delete: deleteTransactionController,
-    starter: starterController
+    starter: starterController,
+    statistics: statisticsController
 };
 
 }

@@ -44,6 +44,7 @@ app.get('/',kachingControllerCallbacks.starter);
 //graphs,piechart,budgeting
   app.get('/kaching/home/report',kachingControllerCallbacks.report);
   app.get('/kaching/learnMore',kachingControllerCallbacks.learnMore);
+  app.get('/kaching/home/statistics',kachingControllerCallbacks.statistics);
 
 //delete
 app.delete('/kaching/home/expenses/:id',kachingControllerCallbacks.delete);

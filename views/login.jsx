@@ -6,9 +6,9 @@ class Login extends React.Component {
     return (
       <DefaultLayout2>
               <div className="loginForm">
+               <img src="/title.jpg" width="700" height="100" alt="title" class="img-fluid"/>
                   <h3>Welcome Back!</h3>
                   <h3> Login to your Kaching</h3>
-
                   <fieldset>
                       <form method="POST" action="/kaching/login">
                           <p> Username: <input type="text" name="username"/> </p>

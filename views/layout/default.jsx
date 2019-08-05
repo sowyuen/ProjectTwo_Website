@@ -5,10 +5,14 @@ class DefaultLayout extends React.Component {
     return (
       <html>
       <head>
+        <script type="text/javascript" src="/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="/Chart.js"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossOrigin="anonymous"/>
           <link rel="stylesheet" type="text/css" href="/bootstrap.css"/>
           <link rel="stylesheet" type="text/css" href="/style.css"/>
-          <title>KAching!</title>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+
       </head>
             <body>
                 <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -25,6 +29,9 @@ class DefaultLayout extends React.Component {
                           <li className="nav-item">
                             <a className="nav-link" href="/kaching/home">Home</a>
                           </li>
+                          <li className="nav-item">
+                                <a className="nav-link" href="/kaching/home/statistics">Current Statistics</a>
+                          </li>
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="/kaching/home/expenses" role="button" aria-haspopup="true" aria-expanded="false">Expenses</a>
                                 <div className="dropdown-menu dropstyle" x-placement="bottom-start" >
@@ -34,17 +41,6 @@ class DefaultLayout extends React.Component {
                               </li>
                         </ul>
                     </div>
-
-                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                        <div class="dropdown-menu" x-placement="bottom-start">
-                          <a class="dropdown-item" href="#">Action</a>
-                          <a class="dropdown-item" href="#">Another action</a>
-                          <a class="dropdown-item" href="#">Something else here</a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                      </li>
 
                     <ul className="navbar-nav mr-auto">
                       <li className="nav-item">
@@ -56,7 +52,7 @@ class DefaultLayout extends React.Component {
                   {this.props.children}
                 </div>
 
-                <footer className="page-footer font-small teal pt-4 text-center footer">
+                <footer className=" font-small teal pt-4 text-center footer">
                   <div className="container-fluid text-center text-md-left">
                     <div className="row footer-row">
                         <h5 className="text-uppercase font-weight-bold"><img src="/kaching.png" width="50" height="50" alt="Kaching!" width="32px" height="30px"/> Get it now!</h5>

@@ -97,7 +97,7 @@ module.exports = (dbPoolInstance) => {
         console.log("just to knw tat we reach here")
         console.log(username);
         //sum the expenses.amount
-        let text = `SELECT users.name,expenses.amount FROM users INNER JOIN expenses ON(users.id = expenses.users_id) WHERE users.username = $1`;
+        let text = `SELECT users.name,expenses.amount,types_id FROM users INNER JOIN expenses ON(users.id = expenses.users_id) WHERE users.username = $1`;
         let values = [username];
 
         // setInterval(generateRandomQuote,300);

@@ -7,16 +7,12 @@
 }
 
 .expensesCard{
-	width: 20rem;
-	height: 10em;
+	width: 30rem;
+	height: 28rem;
 }
 
 .cardTextData{
 	text-align: center;
-}
-
-.cardContainer{
-	height: 300px;
 }
 
 .imgBadge{
@@ -30,6 +26,8 @@
 
 .footer{
 	background-color: #79c2ad;
+	bottom: 0;
+	width:100%;
 }
 
 .footer-row{
@@ -96,14 +94,14 @@ h3{
 	 transform: translate3d(0px, 38px, 0px);
 }
 
-.loginForm{
+.loginForm, .registerForm, .usernameTakenForm, .wrongPasswordForm{
 	margin: 0 auto;
  	padding: 30px;
  	width: 50%;
+ 	text-align: center;
 }
-
-.aShow{
-	color: white;
+.aShow, .a{
+	color: grey;
 }
 
 .page-footer {
@@ -143,5 +141,19 @@ h3{
 
 .source{
 	font-size: 12px;
+	text-align: center;
+}
+
+.wrongPassword, .usernameTaken{
+	width: 200px;
+	margin: 0 auto;
+}
+
+.legend{
+	padding: 4px;
+	margin: 2px;
+}
+
+.container-fluid-s{
 	text-align: center;
 }

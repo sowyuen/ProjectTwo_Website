@@ -37,8 +37,8 @@ class ShowExpenses extends React.Component {
                     <th scope="row"><a href={url}><img className="types_icon"src={item.img} width="53px" height="53px"/></a></th>
                         <td><a className="aShow" href={url}>{item.category}</a></td>
                         <td><a className="aShow" href={url}>{item.description}</a></td>
-                        <td>$ <a className="aShow" href={url}>{item.amount.toFixed(2)}</a></td>
-                        <td>{date}</td>
+                        <td><span className="a">$</span> <a className="aShow" href={url}>{item.amount.toFixed(2)}</a></td>
+                        <td><span className="a">{date}</span></td>
                 </tr>
             </div>
             )
